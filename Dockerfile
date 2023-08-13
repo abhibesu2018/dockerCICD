@@ -1,11 +1,9 @@
-# syntax=docker/dockerfile:1
-FROM busybox:latest
-COPY --chmod=755 <<EOF /app/run.sh
-#!/bin/sh
-while true; do
-  echo -ne "The time is now $(date +%T)\\r"
-  sleep 1
-done
-EOF
+#Base image
+FROM ubuntu:20.04
 
-ENTRYPOINT /app/run.sh
+#Required installations
+RUN apt-get update && apt-get -y install iputils-ping
+#Command
+
+ENTRYPOINT ["ping"]
+CMD ["www.youtube.com"]
